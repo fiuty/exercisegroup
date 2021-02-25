@@ -11,6 +11,9 @@ import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author zhengdayue
  */
@@ -196,4 +199,129 @@ public class RabbitmqConfig {
     public Binding topicBindingTwo(){
         return BindingBuilder.bind(topicQueueTwo()).to(topicExchange()).with(RabbitMqConstants.TOPIC_TWO_ROUTING_KEY);
     }
+
+    /**
+     * 确认消费模式为自动确认机制-AUTO,采用直连传输directExchange消息模型
+     */
+    @Bean
+    public SimpleRabbitListenerContainerFactory singleListenerContainerAuto(){
+        //定义消息监听器所在的容器工厂
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        //设置容器工厂所用的实例
+        factory.setConnectionFactory(connectionFactory);
+        //设置消息在传输中的格式，在这里采用JSON的格式进行传输
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        //设置并发消费者实例的初始数量。在这里为1个
+        factory.setConcurrentConsumers(1);
+        //设置并发消费者实例的最大数量。在这里为1个
+        factory.setMaxConcurrentConsumers(1);
+        //设置并发消费者实例中每个实例拉取的消息数量-在这里为1个
+        factory.setPrefetchCount(1);
+        //确认消费模式为自动确认机制
+        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
+        return factory;
+    }
+
+    //确认消费模式为自动确认机制,采用直连传输directExchange消息模型-交换机
+    @Bean
+    public DirectExchange autoAckDirectExchange() {
+        return new DirectExchange(RabbitMqConstants.AUTO_ACKNOWLEDGE_EXCHANGE, true, false);
+    }
+
+    //确认消费模式为自动确认机制,采用直连传输directExchange消息模型-队列
+    @Bean
+    public Queue autoAckDirectQueue() {
+        return new Queue(RabbitMqConstants.AUTO_ACKNOWLEDGE_QUEUE, true);
+    }
+
+    //确认消费模式为自动确认机制,采用直连传输directExchange消息模型-路由交换机绑定队列
+    @Bean
+    public Binding autoAckDirectBinding(){
+        return BindingBuilder.bind(autoAckDirectQueue()).to(autoAckDirectExchange()).with(RabbitMqConstants.AUTO_ACKNOWLEDGE_ROUTING_KEY);
+    }
+
+    /**
+     * 确认消费模式为手动确认机制-MANUAL,采用直连传输directExchange消息模型
+     */
+    @Bean
+    public SimpleRabbitListenerContainerFactory singleListenerContainerManual(){
+        //定义消息监听器所在的容器工厂
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        //设置容器工厂所用的实例
+        factory.setConnectionFactory(connectionFactory);
+        //设置消息在传输中的格式，在这里采用JSON的格式进行传输
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        //设置并发消费者实例的初始数量。在这里为1个
+        factory.setConcurrentConsumers(1);
+        //设置并发消费者实例的最大数量。在这里为1个
+        factory.setMaxConcurrentConsumers(1);
+        //设置并发消费者实例中每个实例拉取的消息数量-在这里为1个
+        factory.setPrefetchCount(1);
+        //确认消费模式为自动确认机制
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        return factory;
+    }
+
+    //确认消费模式为手动确认机制-MANUAL,采用直连传输directExchange消息模型-交换机
+    @Bean
+    public DirectExchange manualAckDirectExchange() {
+        return new DirectExchange(RabbitMqConstants.MANUAL_ACKNOWLEDGE_EXCHANGE, true, false);
+    }
+
+    //确认消费模式为手动确认机制-MANUAL,采用直连传输directExchange消息模型-队列
+    @Bean
+    public Queue manualAckDirectQueue() {
+        return new Queue(RabbitMqConstants.MANUAL_ACKNOWLEDGE_QUEUE, true);
+    }
+
+    //确认消费模式为手动确认机制-MANUAL,采用直连传输directExchange消息模型-路由交换机绑定队列
+    @Bean
+    public Binding manualAckDirectBinding() {
+        return BindingBuilder.bind(manualAckDirectQueue()).to(manualAckDirectExchange()).with(RabbitMqConstants.MANUAL_ACKNOWLEDGE_ROUTING_KEY);
+    }
+
+    //延迟队列
+    @Bean
+    public Queue delayQueue() {
+        //创建延迟队列的组成成分map，用于存放组成成分的相关成员
+        Map<String, Object> args = new <String, Object>HashMap(16);
+        //延迟队列之后真正消费的交换机
+        args.put("x-dead-letter-exchange", RabbitMqConstants.REAL_DIRECT_EXCHANGE);
+        //延迟队列之后真正消费的路由
+        args.put("x-dead-letter-routing-key", RabbitMqConstants.REAL_DIRECT_ROUTING_KEY);
+        //设定TTL，单位为ms，在这里指的是30s
+        args.put("x-message-ttl", 30000);
+        return new Queue(RabbitMqConstants.DELAY_QUEUE, true,false,false, args);
+    }
+
+    //延迟队列-直连传输directExchange消息模型-交换机
+    @Bean
+    public DirectExchange delayExchange() {
+        return new DirectExchange(RabbitMqConstants.DELAY_EXCHANGE, true, false);
+    }
+
+    //延迟队列-直连传输directExchange消息模型-路由交换机绑定延迟队列
+    @Bean
+    public Binding delayBinding() {
+        return BindingBuilder.bind(delayQueue()).to(delayExchange()).with(RabbitMqConstants.DELAY_ROUTING_KEY);
+    }
+
+    //延迟队列时间到达后-真正的队列
+    @Bean
+    public Queue realQueue() {
+        return new Queue(RabbitMqConstants.REAL_DIRECT_QUEUE, true);
+    }
+
+    //延迟队列时间到达后-真正的交换机
+    @Bean
+    public DirectExchange realExchange() {
+        return new DirectExchange(RabbitMqConstants.REAL_DIRECT_EXCHANGE, true, false);
+    }
+
+    //延迟队列时间到达后-真正的路由交换机绑定队列
+    @Bean
+    public Binding realBinding() {
+        return BindingBuilder.bind(realQueue()).to(realExchange()).with(RabbitMqConstants.REAL_DIRECT_ROUTING_KEY);
+    }
+
 }

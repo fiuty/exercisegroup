@@ -41,4 +41,40 @@ public class RabbitMqConstants {
     public static final String TOPIC_TWO_ROUTING_KEY = "mq.topic.routing.key.#";
 
     public static final String TOPIC_EXCHANGE = "mq.topic.exchange";
+
+    //确认消费模式为自动确认机制,采用直连传输directExchange消息模型
+    public static final String AUTO_ACKNOWLEDGE_QUEUE = "mq.auto.acknowledge.direct.queue";
+
+    public static final String AUTO_ACKNOWLEDGE_ROUTING_KEY = "mq.auto.acknowledge.direct.routing.key";
+
+    public static final String AUTO_ACKNOWLEDGE_EXCHANGE = "mq.auto.acknowledge.direct.exchange";
+
+    //确认消费模式为手动确认机制,采用直连传输directExchange消息模型
+    public static final String MANUAL_ACKNOWLEDGE_QUEUE = "mq.manual.acknowledge.direct.queue";
+
+    public static final String MANUAL_ACKNOWLEDGE_ROUTING_KEY = "mq.manual.acknowledge.direct.routing.key";
+
+    public static final String MANUAL_ACKNOWLEDGE_EXCHANGE = "mq.manual.acknowledge.direct.exchange";
+
+    //死信队列
+    public static final String DEAD_QUEUE = "mq.dead.queue";
+
+    public static final String DEAD_EXCHANGE = "mq.dead.exchange";
+
+    public static final String DEAD_ROUTING_KEY = "mq.dead.routing.key";
+
+    //延迟队列
+    public static final String DELAY_QUEUE = "mq.delay.queue";
+
+    public static final String DELAY_EXCHANGE = "mq.delay.exchange";
+
+    public static final String DELAY_ROUTING_KEY = "mq.delay.routing.key";
+
+    //延迟队列延迟时间之后的真正消费队列
+    public static final String REAL_DIRECT_QUEUE = "mq.delay.real.queue";
+
+    public static final String REAL_DIRECT_EXCHANGE = "mq.delay.real.exchange";
+
+    public static final String REAL_DIRECT_ROUTING_KEY = "mq.delay.real.routing.key";
+
 }

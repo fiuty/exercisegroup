@@ -2,6 +2,9 @@ package com.dayue;
 
 import com.dayue.entity.Order;
 import com.dayue.rabbitmq.BasicPublisher;
+import com.dayue.rabbitmq.ackmodel.auto.AutoAckPublisher;
+import com.dayue.rabbitmq.ackmodel.manual.ManualAckPublisher;
+import com.dayue.rabbitmq.delay.DelayQueuePublisher;
 import com.dayue.springevent.OrderPublisher;
 import com.dayue.rabbitmq.exchangemodel.direct.*;
 import com.dayue.rabbitmq.exchangemodel.fanout.*;
@@ -30,6 +33,15 @@ public class MessageQueueApplicationTests {
 
     @Autowired
     private TopicPublisher topicPublisher;
+
+    @Autowired
+    private AutoAckPublisher autoAckPublisher;
+
+    @Autowired
+    private ManualAckPublisher manualAckPublisher;
+
+    @Autowired
+    private DelayQueuePublisher delayQueuePublisher;
 
     @Test
     public void contextLoads() {
@@ -84,5 +96,26 @@ public class MessageQueueApplicationTests {
         //topicPublisher.sendMsgTopic(order,routingKeyTwo);
         //topicPublisher.sendMsgTopic(order,routingKeyThree);
 
+    }
+
+    @Test
+    public void testAutoAckPublish() {
+        Order order = new Order();
+        order.setOrdernum("123456");
+        autoAckPublisher.sendMsg(order);
+    }
+
+    @Test
+    public void testManualAckPublish() {
+        Order order = new Order();
+        order.setOrdernum("1234567");
+        manualAckPublisher.sendMsg(order);
+    }
+
+    @Test
+    public void testDelayPublish() {
+        Order order = new Order();
+        order.setOrdernum("1234567");
+        delayQueuePublisher.sendMsg(order);
     }
 }
