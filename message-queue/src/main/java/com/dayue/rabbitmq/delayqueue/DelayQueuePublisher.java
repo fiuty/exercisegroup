@@ -1,4 +1,4 @@
-package com.dayue.rabbitmq.delay;
+package com.dayue.rabbitmq.delayqueue;
 
 import com.dayue.entity.Order;
 import com.dayue.rabbitmq.RabbitMqConstants;

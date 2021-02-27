@@ -285,11 +285,11 @@ public class RabbitmqConfig {
     public Queue delayQueue() {
         //创建延迟队列的组成成分map，用于存放组成成分的相关成员
         Map<String, Object> args = new <String, Object>HashMap(16);
-        //延迟队列之后真正消费的交换机
+        //设置消息过期之后的死信交换机(真正消费的交换机)
         args.put("x-dead-letter-exchange", RabbitMqConstants.REAL_DIRECT_EXCHANGE);
-        //延迟队列之后真正消费的路由
+        //设置消息过期之后死信队列的路由(真正消费的路由)
         args.put("x-dead-letter-routing-key", RabbitMqConstants.REAL_DIRECT_ROUTING_KEY);
-        //设定TTL，单位为ms，在这里指的是30s
+        //设定消息的TTL，单位为ms，在这里指的是30s
         args.put("x-message-ttl", 30000);
         return new Queue(RabbitMqConstants.DELAY_QUEUE, true,false,false, args);
     }
@@ -306,22 +306,85 @@ public class RabbitmqConfig {
         return BindingBuilder.bind(delayQueue()).to(delayExchange()).with(RabbitMqConstants.DELAY_ROUTING_KEY);
     }
 
-    //延迟队列时间到达后-真正的队列
+    //延迟队列时间到达后-死信队列（真正处理消息的队列）
     @Bean
     public Queue realQueue() {
         return new Queue(RabbitMqConstants.REAL_DIRECT_QUEUE, true);
     }
 
-    //延迟队列时间到达后-真正的交换机
+    //延迟队列时间到达后-死信交换机（真正处理消息的交换机）
     @Bean
     public DirectExchange realExchange() {
         return new DirectExchange(RabbitMqConstants.REAL_DIRECT_EXCHANGE, true, false);
     }
 
-    //延迟队列时间到达后-真正的路由交换机绑定队列
+    //延迟队列时间到达后-死信队列路由交换机绑定队列（真正的路由交换机绑定队列）
     @Bean
     public Binding realBinding() {
         return BindingBuilder.bind(realQueue()).to(realExchange()).with(RabbitMqConstants.REAL_DIRECT_ROUTING_KEY);
+    }
+
+    //演示死信队列,为directExchange消息模型队列绑定死信队列
+    @Bean
+    public Queue directDeadPreQueue() {
+        //创建死信队列的组成成分map，用于存放组成成分的相关成员
+        Map<String, Object> args = new <String, Object>HashMap(2);
+        //设死信交换机
+        args.put("x-dead-letter-exchange", RabbitMqConstants.DEAD_EXCHANGE);
+        //死信队列的路由
+        args.put("x-dead-letter-routing-key", RabbitMqConstants.DEAD_ROUTING_KEY);
+        return new Queue(RabbitMqConstants.DIRECT_QUEUE_DEAD_PRE, true, false, false, args);
+    }
+
+    //交换机
+    @Bean
+    public DirectExchange directDeadPreExchange() {
+        return new DirectExchange(RabbitMqConstants.DIRECT_EXCHANGE_DEAD_PRE, true, false);
+    }
+
+    //交换机路由绑定队列
+    @Bean
+    public Binding directDeadPreBinding() {
+        return BindingBuilder.bind(directDeadPreQueue()).to(directDeadPreExchange()).with(RabbitMqConstants.DIRECT_ROUTING_KEY_DEAD_PRE);
+    }
+
+    //死信队列
+    @Bean
+    public Queue deadQueue() {
+        return new Queue(RabbitMqConstants.DEAD_QUEUE, true);
+    }
+
+    //死信交换机
+    @Bean
+    public DirectExchange deadExchange() {
+        return new DirectExchange(RabbitMqConstants.DEAD_EXCHANGE, true, false);
+    }
+
+    //路由交换机绑定死信队列
+    @Bean
+    public Binding deadBinding() {
+        return BindingBuilder.bind(deadQueue()).to(deadExchange()).with(RabbitMqConstants.DEAD_ROUTING_KEY);
+    }
+
+    //优先级队列
+    @Bean
+    public Queue priorityQueue() {
+        Map<String, Object> args = new <String, Object>HashMap(1);
+        //设置消息优先级,有10个等级,消息不设置优先级默认为0
+        args.put("x-max-priority", 10);
+        return new Queue(RabbitMqConstants.PRIORITY_QUEUE, true, false, false, args);
+    }
+
+    //优先级队列-交换机
+    @Bean
+    public DirectExchange priorityExchange() {
+        return new DirectExchange(RabbitMqConstants.PRIORITY_EXCHANGE, true,false);
+    }
+
+    //优先级队列-绑定队列
+    @Bean
+    public Binding priorityBinding() {
+        return BindingBuilder.bind(priorityQueue()).to(priorityExchange()).with(RabbitMqConstants.PRIORITY_ROUTING_KEY);
     }
 
 }

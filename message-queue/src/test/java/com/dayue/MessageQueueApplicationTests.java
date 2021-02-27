@@ -4,7 +4,9 @@ import com.dayue.entity.Order;
 import com.dayue.rabbitmq.BasicPublisher;
 import com.dayue.rabbitmq.ackmodel.auto.AutoAckPublisher;
 import com.dayue.rabbitmq.ackmodel.manual.ManualAckPublisher;
-import com.dayue.rabbitmq.delay.DelayQueuePublisher;
+import com.dayue.rabbitmq.deadqueue.OrdinaryPublisher;
+import com.dayue.rabbitmq.delayqueue.DelayQueuePublisher;
+import com.dayue.rabbitmq.priorityqueue.PriorityPublisher;
 import com.dayue.springevent.OrderPublisher;
 import com.dayue.rabbitmq.exchangemodel.direct.*;
 import com.dayue.rabbitmq.exchangemodel.fanout.*;
@@ -42,6 +44,12 @@ public class MessageQueueApplicationTests {
 
     @Autowired
     private DelayQueuePublisher delayQueuePublisher;
+
+    @Autowired
+    private OrdinaryPublisher ordinaryPublisher;
+
+    @Autowired
+    private PriorityPublisher priorityPublisher;
 
     @Test
     public void contextLoads() {
@@ -118,4 +126,27 @@ public class MessageQueueApplicationTests {
         order.setOrdernum("1234567");
         delayQueuePublisher.sendMsg(order);
     }
+
+    @Test
+    public void testDeadPrePublish() {
+        Order order = new Order();
+        order.setOrdernum("1234567");
+        ordinaryPublisher.sendMsg(order);
+    }
+
+    @Test
+    public void testPriorityPublish() throws InterruptedException {
+        Order order1 = new Order();
+        order1.setOrdernum("123");
+
+        Order order2 = new Order();
+        order2.setOrdernum("456");
+        //发送订单1
+        priorityPublisher.sendMsg(order1, 1);
+        //延迟两秒后发送订单2
+        Thread.sleep(2000);
+        //发送订单2
+        priorityPublisher.sendMsg(order2, 2);
+    }
+
 }

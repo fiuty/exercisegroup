@@ -56,13 +56,6 @@ public class RabbitMqConstants {
 
     public static final String MANUAL_ACKNOWLEDGE_EXCHANGE = "mq.manual.acknowledge.direct.exchange";
 
-    //死信队列
-    public static final String DEAD_QUEUE = "mq.dead.queue";
-
-    public static final String DEAD_EXCHANGE = "mq.dead.exchange";
-
-    public static final String DEAD_ROUTING_KEY = "mq.dead.routing.key";
-
     //延迟队列
     public static final String DELAY_QUEUE = "mq.delay.queue";
 
@@ -76,5 +69,26 @@ public class RabbitMqConstants {
     public static final String REAL_DIRECT_EXCHANGE = "mq.delay.real.exchange";
 
     public static final String REAL_DIRECT_ROUTING_KEY = "mq.delay.real.routing.key";
+
+    //演示死信队列,为directExchange消息模型队列绑定死信队列
+    public static final String DIRECT_QUEUE_DEAD_PRE = "mq.direct.queue.dead.pre";
+
+    public static final String DIRECT_EXCHANGE_DEAD_PRE = "mq.direct.exchange.dead.pre";
+
+    public static final String DIRECT_ROUTING_KEY_DEAD_PRE = "mq.direct.routing.key.dead.pre";
+
+    //死信队列
+    public static final String DEAD_QUEUE = "mq.dead.queue";
+
+    public static final String DEAD_EXCHANGE = "mq.dead.exchange";
+
+    public static final String DEAD_ROUTING_KEY = "mq.dead.routing.key";
+
+    //优先级队列
+    public static final String PRIORITY_QUEUE = "mq.priority.direct.queue";
+
+    public static final String PRIORITY_EXCHANGE = "mq.priority.direct.exchange";
+
+    public static final String PRIORITY_ROUTING_KEY = "mq.priority.direct.routing.key";
 
 }
