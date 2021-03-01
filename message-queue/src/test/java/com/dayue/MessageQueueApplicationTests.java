@@ -5,7 +5,7 @@ import com.dayue.rabbitmq.BasicPublisher;
 import com.dayue.rabbitmq.ackmodel.auto.AutoAckPublisher;
 import com.dayue.rabbitmq.ackmodel.manual.ManualAckPublisher;
 import com.dayue.rabbitmq.deadqueue.OrdinaryPublisher;
-import com.dayue.rabbitmq.delayqueue.DelayQueuePublisher;
+import com.dayue.rabbitmq.delayqueue.DelayQueuePrePublisher;
 import com.dayue.rabbitmq.priorityqueue.PriorityPublisher;
 import com.dayue.springevent.OrderPublisher;
 import com.dayue.rabbitmq.exchangemodel.direct.*;
@@ -43,7 +43,7 @@ public class MessageQueueApplicationTests {
     private ManualAckPublisher manualAckPublisher;
 
     @Autowired
-    private DelayQueuePublisher delayQueuePublisher;
+    private DelayQueuePrePublisher delayQueuePrePublisher;
 
     @Autowired
     private OrdinaryPublisher ordinaryPublisher;
@@ -124,7 +124,7 @@ public class MessageQueueApplicationTests {
     public void testDelayPublish() {
         Order order = new Order();
         order.setOrdernum("1234567");
-        delayQueuePublisher.sendMsg(order);
+        delayQueuePrePublisher.sendMsg(order);
     }
 
     @Test

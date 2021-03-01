@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 /**
- * 延迟队列-生产者
+ * 普通队列-生产者
  * @author zhengdayue
  */
 @Slf4j
 @Component
-public class DelayQueuePublisher {
+public class DelayQueuePrePublisher {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -26,7 +26,7 @@ public class DelayQueuePublisher {
     public void sendMsg(Order order) {
         try {
             //设置延迟队列交换机、延迟队列路由键,消息实体并且发送消息
-            rabbitTemplate.convertAndSend(RabbitMqConstants.DELAY_EXCHANGE, RabbitMqConstants.DELAY_ROUTING_KEY, order);
+            rabbitTemplate.convertAndSend(RabbitMqConstants.DELAY_EXCHANGE_PRE, RabbitMqConstants.DELAY_ROUTING_KEY_PRE, order);
             log.info("延迟队列消息发送成功,消息：{},发送时间：{}", order, LocalDateTime.now());
         } catch (Exception e) {
             log.error("延迟队列消息发送异常,消息：{},异常e：", order, e);

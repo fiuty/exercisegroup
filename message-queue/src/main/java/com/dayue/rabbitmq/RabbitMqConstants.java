@@ -56,19 +56,19 @@ public class RabbitMqConstants {
 
     public static final String MANUAL_ACKNOWLEDGE_EXCHANGE = "mq.manual.acknowledge.direct.exchange";
 
+    //演示延迟队列,为directExchange消息模型队列绑定延迟队列
+    public static final String DELAY_QUEUE_PRE = "mq.direct.queue.delay.pre";
+
+    public static final String DELAY_EXCHANGE_PRE = "mq.direct.exchange.delay.pre";
+
+    public static final String DELAY_ROUTING_KEY_PRE = "mq.routing.key.delay.pre";
+
     //延迟队列
     public static final String DELAY_QUEUE = "mq.delay.queue";
 
     public static final String DELAY_EXCHANGE = "mq.delay.exchange";
 
     public static final String DELAY_ROUTING_KEY = "mq.delay.routing.key";
-
-    //延迟队列延迟时间之后的真正消费队列
-    public static final String REAL_DIRECT_QUEUE = "mq.delay.real.queue";
-
-    public static final String REAL_DIRECT_EXCHANGE = "mq.delay.real.exchange";
-
-    public static final String REAL_DIRECT_ROUTING_KEY = "mq.delay.real.routing.key";
 
     //演示死信队列,为directExchange消息模型队列绑定死信队列
     public static final String DIRECT_QUEUE_DEAD_PRE = "mq.direct.queue.dead.pre";

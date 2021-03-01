@@ -28,7 +28,8 @@ public class OrdinaryConsumer {
             channel.basicAck(tag, false);
         } catch (Exception e) {
             log.error("普通队列-消费者,监听到消息：{},发生异常,消息不再归入队列中,转向死信队列,异常e：", order, e);
-            channel.basicNack(tag, false, false);
+            //channel.basicNack(tag, false, false);
+            channel.basicReject(tag, false);
         }
     }
 }
