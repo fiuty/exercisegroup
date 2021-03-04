@@ -7,31 +7,19 @@
         <artifactId>exercise-group</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <groupId>com.dayue</groupId>
-    <artifactId>message-queue</artifactId>
+    <artifactId>cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>message-queue</name>
-    <description>Demo project for Message Queue</description>
+    <name>cache</name>
+    <description>Demo project for Cache</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-rabbit-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
