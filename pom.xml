@@ -9,6 +9,12 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <modules>
+        <module>com.dayue.cache</module>
+        <module>com.dayue.message-queue</module>
+        <module>com.dayue.thread</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <groupId>com.dayue</groupId>
     <artifactId>exercise-group</artifactId>

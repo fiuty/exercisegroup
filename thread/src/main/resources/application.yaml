@@ -1,0 +1,6 @@
+logging:
+  level:
+    com.dayue: debug
+    org.springframework: info
+server:
+  port: 8082
