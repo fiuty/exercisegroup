@@ -10,9 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
-        <module>com.dayue.cache</module>
-        <module>com.dayue.message-queue</module>
-        <module>com.dayue.thread</module>
+        <module>cache</module>
+        <module>message-queue</module>
+        <module>thread</module>
+        <module>pattern</module>
     </modules>
     <packaging>pom</packaging>
 
