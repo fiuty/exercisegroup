@@ -1,0 +1,4 @@
+# Auto Confiure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.dayue.demo.spring.boot.starter.configure.DemoAutoConfiguration,\
+com.dayue.demo.spring.boot.auto.assemble.AssembleAutoConfiguration

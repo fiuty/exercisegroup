@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @author zhengdayue
  */
 public interface ShopItemInfoRepository extends JpaRepository<ShopItemInfo,Long>, JpaSpecificationExecutor<ShopItemInfo> {
+
+    ShopItemInfo findByName(String name);
 }

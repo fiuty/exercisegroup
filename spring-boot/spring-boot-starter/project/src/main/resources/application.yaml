@@ -1,0 +1,9 @@
+server:
+  port: 8083
+com:
+  demo1:
+    age: 18
+    name: zhangsan
+  demo2:
+    name: lili
+    age: 25
