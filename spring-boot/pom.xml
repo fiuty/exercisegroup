@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-starter</module>
+        <module>spring-boot-enable</module>
+        <module>spring-boot-conditional</module>
     </modules>
 
     <properties>
