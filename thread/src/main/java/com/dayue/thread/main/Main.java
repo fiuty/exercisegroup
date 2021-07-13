@@ -1,6 +1,7 @@
 package com.dayue.thread.main;
 
 import com.dayue.thread.domain.WorkerThread;
+import com.dayue.thread.service.impl.JavaLockServiceImpl;
 import com.dayue.thread.util.Tools;
 
 /**
@@ -13,7 +14,9 @@ public class Main {
 
     //线程原子性问题
     public static void main(String[] args) {
-
+        JavaLockServiceImpl javaLockService = new JavaLockServiceImpl();
+        javaLockService.synKeywordLock();
+        javaLockService.interfaceLock();
     }
 
     //线程原子性问题

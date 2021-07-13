@@ -64,7 +64,18 @@ public class ThreadPoolServiceImpl implements ThreadPoolService {
     }
 
     @Override
-    public void defineThreadPool() {
+    public void defineJavaThreadPool() {
+        //核心线程数10、最大线程数20，线程空闲时间60s、阻塞队列有界最多10000个任务、默认线程工厂、阻塞队列阻塞策略CallerRun谁提交谁执行。
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 60, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(10000), Executors.defaultThreadFactory(), new ThreadPoolExecutor.CallerRunsPolicy());
+        for (int i = 0; i < 100; i++) {
+            threadPoolExecutor.execute(new Task());
+        }
+    }
+
+    @Override
+    public void defineSpringThreadPool() {
+        //核心线程数10、最大线程数20，线程空闲时间60s、阻塞队列有界最多10000个任务、默认线程工厂、阻塞队列阻塞策略CallerRun谁提交谁执行。
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setMaxPoolSize(20);
         threadPoolTaskExecutor.setCorePoolSize(10);
