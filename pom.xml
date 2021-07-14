@@ -15,6 +15,7 @@
         <module>thread</module>
         <module>pattern</module>
         <module>spring-boot</module>
+        <module>algorithm</module>
     </modules>
     <packaging>pom</packaging>
 
