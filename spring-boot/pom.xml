@@ -16,6 +16,7 @@
         <module>spring-boot-enable</module>
         <module>spring-boot-conditional</module>
         <module>spring</module>
+        <module>spring-security</module>
     </modules>
 
     <properties>
