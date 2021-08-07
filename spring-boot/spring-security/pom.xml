@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.dayue</groupId>
-    <artifactId>security</artifactId>
+    <artifactId>spring-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>security</name>
     <description>Demo project for Spring Boot</description>
@@ -17,6 +17,12 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -48,6 +54,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dayue</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
