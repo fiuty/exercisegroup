@@ -1,4 +1,4 @@
-####《springboot rabbitmq入门使用》
+#### 《springboot rabbitmq入门使用》
 - 以下例子代码可在github或者在gitee下载
   github：[代码链接](https://github.com/fiuty/exercisegroup)
   gitee：[代码链接](https://gitee.com/fiuty/exercisegroup.git)
