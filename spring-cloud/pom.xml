@@ -13,6 +13,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-cloud</name>
     <description>Demo project for Spring Cloud</description>
+    <!-- 多模块父模块打包方式需要为pom，解决 'packaging' with value 'jar' is invalid Aggregator projects require 'pom' as packaging-->
+    <packaging>pom</packaging>
 
     <modules>
         <module>eureka</module>

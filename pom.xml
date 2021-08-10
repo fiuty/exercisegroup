@@ -17,6 +17,7 @@
         <module>spring-boot</module>
         <module>algorithm</module>
         <module>common</module>
+        <module>spring-cloud</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -13,7 +13,8 @@ public interface ThreadPoolService {
     //缓存线程池：无限制创建线程数量，当任务特别多可能会超出操作系统上线或者导致内存不足
     void cachedThreadPool();
 
-    //周期线程池：延迟阻塞队列，按照时间入队，也是无界阻塞队列，任务堆积oom
+    //定时线程池，周期线程池：延迟阻塞队列，按照时间入队，也是无界阻塞队列，任务堆积oom
+    // （根据场景而定，在eurekaClient的实现类discoveryClient中的初始化调度任务initScheduledTasks中，就有用到定时线程池，定时地更新服务缓存）
     void scheduledThreadPool();
 
     //唯一线程池：核心线程数只有1，但是阻塞队列为无界阻塞队列，任务堆积oom风险。
