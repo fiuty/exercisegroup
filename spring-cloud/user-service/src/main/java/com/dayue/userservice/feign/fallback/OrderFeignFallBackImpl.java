@@ -1,4 +1,4 @@
-package com.dayue.userservice.service.impl;
+package com.dayue.userservice.feign.fallback;
 
 import com.dayue.userservice.feign.OrderFeign;
 import org.springframework.stereotype.Component;

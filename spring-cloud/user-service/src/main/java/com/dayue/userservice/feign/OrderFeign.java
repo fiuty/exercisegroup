@@ -1,6 +1,6 @@
 package com.dayue.userservice.feign;
 
-import com.dayue.userservice.service.impl.OrderFeignFallBackImpl;
+import com.dayue.userservice.feign.fallback.OrderFeignFallBackImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
