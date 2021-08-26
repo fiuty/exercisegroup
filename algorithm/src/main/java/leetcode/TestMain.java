@@ -47,9 +47,103 @@ public class TestMain {
 //
 //        ListNode listNode = addTwoNumbers(treeNode, treeNode3);
 
-        System.out.println(lengthOfLongestSubstring(" "));
+        //System.out.println(lengthOfLongestSubstring(" "));
+
+//        int [] nums1 = {2};
+//        int [] nums2 = {};
+//        System.out.println(findMedianSortedArrays(nums1, nums2));
+
+        //System.out.println(isAnagram("rat","car"));
+
+
+//        ListNode treeNode1 = new ListNode(1);
+//        ListNode treeNode2 = new ListNode(2);
+//        ListNode treeNode3 = new ListNode(3);
+//        ListNode treeNode4 = new ListNode(4);
+//        ListNode treeNode5 = new ListNode(5);
+//        treeNode1.next = treeNode2;
+//        treeNode2.next = treeNode3;
+//        treeNode3.next = treeNode4;
+//        treeNode4.next = treeNode5;
+        ListNode head = new ListNode();
+        ListNode listNode = reverseList(null);
     }
 
+    //	#25 K 个一组翻转链表
+
+    //  #24 两两交换链表中的节点
+
+    //	#206 反转链表
+    public static ListNode reverseList(ListNode head) {
+        ListNode reverseHead = new ListNode();
+        ListNode current = head;
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = reverseHead.next;
+            reverseHead.next = current;
+            current = next;
+        }
+        return reverseHead.next;
+    }
+
+    //	#242 有效的字母异位词
+    public static boolean isAnagram(String s, String t) {
+        String letters = "qwertyuiopasdfghjklzxcvbnm";
+        int[] nums = new int[letters.length()];
+        for (int i = 0; i < s.length(); i++) {
+            String temp = s.charAt(i) + "";
+            int num = letters.indexOf(temp);
+            ++nums[num];
+        }
+        for (int i = 0; i < t.length(); i++) {
+            String temp = t.charAt(i) + "";
+            int num = letters.indexOf(temp);
+            --nums[num];
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //	#4 寻找两个正序数组的中位数(注意复用好计算的变量如size，length，避免多余计算。)
+    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int i = 0;
+        int j = 0;
+        int [] allnums = new int[nums1.length + nums2.length];
+        int index = 0;
+        while (i <= nums1.length - 1 || j <= nums2.length - 1) {
+            //i,j同时存在
+            if (i <= nums1.length - 1 && j <= nums2.length - 1) {
+                int num1 = nums1[i];
+                int num2 = nums2[j];
+                if (num1 < num2) {
+                    allnums[index++] = num1;
+                    i++;
+                } else {
+                    allnums[index++] = num2;
+                    j++;
+                }
+                //i存在，j不存在
+            } else if (i <= nums1.length - 1 && j > nums2.length - 1) {
+                allnums[index++] = nums1[i++];
+            }else {
+                //j存在，i不存在
+                allnums[index++] = nums2[j++];
+            }
+        }
+        for (int pr = 0; pr < allnums.length; pr++) {
+            System.out.print(allnums[pr]);
+        }
+        System.out.println("-------");
+        if (allnums.length % 2 != 0) {
+            return allnums[(allnums.length - 1) / 2];
+        } else {
+            return (allnums[allnums.length / 2] + allnums[(allnums.length / 2) - 1]) / 2.0;
+        }
+    }
 
 
     //  #3 无重复字符的最长子串(方式不太行，不简洁)
