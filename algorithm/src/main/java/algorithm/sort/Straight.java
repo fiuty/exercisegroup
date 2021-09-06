@@ -1,4 +1,4 @@
-package sort;
+package algorithm.sort;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ public class Straight {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i - 1] > nums[i]) {
                 int temp = nums[i];
-                for (int j = i - 1; temp < nums[j]; j--) {
+                for (int j = i - 1; j>=0 && temp < nums[j]; j--) {
                     nums[j + 1] = nums[j];
                     nums[j] = temp;
                 }

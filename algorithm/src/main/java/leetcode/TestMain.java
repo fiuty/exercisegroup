@@ -7,6 +7,7 @@ import leetcode.bytedance.ListNode;
  * @author zhengdayue
  * @date: 2021-08-26
  */
+import java.util.*;
 public class TestMain {
 
     public static void main(String[] args) {
@@ -65,8 +66,21 @@ public class TestMain {
 //        treeNode2.next = treeNode3;
 //        treeNode3.next = treeNode4;
 //        treeNode4.next = treeNode5;
-        ListNode head = new ListNode();
-        ListNode listNode = reverseList(null);
+        Scanner scanner = new Scanner(System.in);
+        String next = scanner.next();
+        int[] array = new int[128];
+        for (int i = 0; i < next.length(); i++) {
+            char c = next.charAt(i);
+            if (c > 127) {
+                continue;
+            }
+            array[c] = 1;
+        }
+        int num = 0;
+        for (int i = 0; i < array.length; i++) {
+            num += array[i];
+        }
+        System.out.println(num);
     }
 
     //	#25 K 个一组翻转链表
