@@ -1,7 +1,7 @@
 package leetcode;
 
 
-import leetcode.bytedance.ListNode;
+import datastructure.linkedlist.ListNode;
 
 /**
  * @author zhengdayue

@@ -1,4 +1,4 @@
-package leetcode.bytedance;
+package datastructure.linkedlist;
 
 /**
  * @author zhengdayue
