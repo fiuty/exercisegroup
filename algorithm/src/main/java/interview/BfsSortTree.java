@@ -5,7 +5,7 @@ import datastructure.tree.TreeNode;
 import java.util.LinkedList;
 
 /**
- * 10-20分钟手写
+ * 华为一面笔试题10-20分钟手写
  * 对二叉排序树做广度优先搜索
  * @author zhengdayue
  */

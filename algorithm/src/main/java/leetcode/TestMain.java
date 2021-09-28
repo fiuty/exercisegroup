@@ -7,83 +7,84 @@ import datastructure.linkedlist.ListNode;
  * @author zhengdayue
  * @date: 2021-08-26
  */
-import java.util.*;
 public class TestMain {
 
     public static void main(String[] args) {
-        //System.out.println(reverseLeftWords("abcdefg",2));
-        //System.out.println(reverseLeftWords("lrloseumgh", 6));
-
-        //int []nums = {3,3};
-        //int target = 6;
-        //int[] ints = twoSum(nums, target);
-        //System.out.println(ints[0]+":"+ ints[1]);
-
-//        TreeNode treeNode = new TreeNode(4);
-//        TreeNode treeNode1 = new TreeNode(2);
-//        TreeNode treeNode2 = new TreeNode(7);
-//        TreeNode treeNode3 = new TreeNode(1);
-//        TreeNode treeNode4 = new TreeNode(3);
-//        TreeNode treeNode5 = new TreeNode(6);
-//        TreeNode treeNode6 = new TreeNode(9);
-//        treeNode1.left = treeNode3;
-//        treeNode1.right = treeNode4;
-//        treeNode2.left = treeNode5;
-//        treeNode2.right = treeNode6;
-//        treeNode.left = treeNode1;
-//        treeNode.right = treeNode2;
-//        TreeNode result = mirrorTree(treeNode);
-
-//        ListNode treeNode = new ListNode(2);
-//        ListNode treeNode1 = new ListNode(4);
-//        ListNode treeNode2 = new ListNode(3);
-//        treeNode1.next = treeNode2;
-//        treeNode.next = treeNode1;
-//
-//        ListNode treeNode3 = new ListNode(5);
-//        ListNode treeNode4 = new ListNode(6);
-//        ListNode treeNode5 = new ListNode(4);
-//        treeNode4.next = treeNode5;
-//        treeNode3.next = treeNode4;
-//
-//        ListNode listNode = addTwoNumbers(treeNode, treeNode3);
-
-        //System.out.println(lengthOfLongestSubstring(" "));
-
-//        int [] nums1 = {2};
-//        int [] nums2 = {};
-//        System.out.println(findMedianSortedArrays(nums1, nums2));
-
-        //System.out.println(isAnagram("rat","car"));
-
-
-//        ListNode treeNode1 = new ListNode(1);
-//        ListNode treeNode2 = new ListNode(2);
-//        ListNode treeNode3 = new ListNode(3);
-//        ListNode treeNode4 = new ListNode(4);
-//        ListNode treeNode5 = new ListNode(5);
-//        treeNode1.next = treeNode2;
-//        treeNode2.next = treeNode3;
-//        treeNode3.next = treeNode4;
-//        treeNode4.next = treeNode5;
-        Scanner scanner = new Scanner(System.in);
-        String next = scanner.next();
-        int[] array = new int[128];
-        for (int i = 0; i < next.length(); i++) {
-            char c = next.charAt(i);
-            if (c > 127) {
-                continue;
-            }
-            array[c] = 1;
+        ListNode treeNode1 = new ListNode(1);
+        ListNode treeNode2 = new ListNode(2);
+        ListNode treeNode3 = new ListNode(3);
+        ListNode treeNode4 = new ListNode(4);
+        ListNode treeNode5 = new ListNode(5);
+        treeNode1.next = treeNode2;
+        treeNode2.next = treeNode3;
+        treeNode3.next = treeNode4;
+        treeNode4.next = treeNode5;
+        ListNode listNode = reverseKGroup(treeNode1, 3);
+        while (listNode != null) {
+            System.out.print(listNode.val + " ");
+            listNode = listNode.next;
         }
-        int num = 0;
-        for (int i = 0; i < array.length; i++) {
-            num += array[i];
-        }
-        System.out.println(num);
     }
 
     //	#25 K 个一组翻转链表
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode reverseHead = new ListNode();
+        ListNode currentHead = reverseHead;
+        boolean flag = false;
+        boolean noFull = false;
+        while (true) {
+            //指向反转头节点
+            ListNode currentNodeHead = new ListNode();
+            //指向反转结尾节点
+            ListNode currentNodeTail = new ListNode();
+            //判断是否满足k个节点
+            ListNode temp = new ListNode();
+            temp.next = head;
+            for(int i=0;i<k;i++){
+                temp = temp.next;
+                if (temp == null) {
+                    noFull = true;
+                    currentHead.next = head;
+                    break;
+                }
+            }
+            if (noFull) {
+                break;
+            }
+            for (int i = 0; i < k; i++) {
+                if (i == 0) {
+                    //保留反转结尾节点
+                    currentNodeTail.next = head;
+                }
+                ListNode next = head.next;
+                head.next = currentNodeHead.next;
+                currentNodeHead.next = head;
+                head = next;
+                if (head == null) {
+                    flag = true;
+                    break;
+                }
+            }
+            currentHead.next = currentNodeHead.next;
+            currentHead = currentNodeTail.next;
+            if (flag) {
+                break;
+            }
+        }
+        return reverseHead.next;
+    }
+
+    public ListNode rev(ListNode listNode) {
+        ListNode revHead = new ListNode();
+        ListNode current = listNode;
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = revHead.next;
+            revHead.next = current;
+            current = next;
+        }
+        return revHead.next;
+    }
 
     //  #24 两两交换链表中的节点
 
