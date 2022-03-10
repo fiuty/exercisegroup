@@ -18,6 +18,7 @@
         <module>algorithm</module>
         <module>common</module>
         <module>spring-cloud</module>
+        <module>jvm</module>
     </modules>
     <packaging>pom</packaging>
 
