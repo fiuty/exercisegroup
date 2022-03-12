@@ -4,16 +4,12 @@ import cn.hutool.json.JSONUtil;
 import com.dayue.spring.pattern.templates.jdbctemplate.domain.Student;
 import com.dayue.spring.pattern.templates.jdbctemplate.service.DefineJcbcTemplate;
 import com.dayue.spring.pattern.templates.jdbctemplate.service.JdbcService;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 /**
@@ -34,13 +30,11 @@ public class JdbcServiceImpl implements JdbcService {
         //一部分是准备和释放资源以及执行 SQL 语句，另一部分则是处理 SQL 执行结果
         try {
             //创建dataSource
-            ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-            comboPooledDataSource.setUser("root");
-            comboPooledDataSource.setPassword("123456");
-            comboPooledDataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            comboPooledDataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/exercisegroup?useUnicode=true&characterEncoding=utf-8");
             //获取连接
-            Connection connection = comboPooledDataSource.getConnection();
+            Connection connection = DriverManager
+                    .getConnection("jdbc:mysql://127.0.0.1:3306/exercisegroup?useUnicode=true&characterEncoding=utf-8",
+                            "root",
+                            "123456");
             //执行查询
             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where id = 1");
             //获取执行结果
