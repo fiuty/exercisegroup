@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 
@@ -25,16 +26,16 @@ public class JdbcServiceImpl implements JdbcService {
     @Autowired
     private DefineJcbcTemplate defineJcbcTemplate;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     public void originalJdbc() {
         //一部分是准备和释放资源以及执行 SQL 语句，另一部分则是处理 SQL 执行结果
         try {
             //创建dataSource
             //获取连接
-            Connection connection = DriverManager
-                    .getConnection("jdbc:mysql://127.0.0.1:3306/exercisegroup?useUnicode=true&characterEncoding=utf-8",
-                            "root",
-                            "123456");
+            Connection connection = dataSource.getConnection();
             //执行查询
             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where id = 1");
             //获取执行结果
