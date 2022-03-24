@@ -1,0 +1,3 @@
+# Auto Confiure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.dayue.common.exception.UnifiedExceptionHandler

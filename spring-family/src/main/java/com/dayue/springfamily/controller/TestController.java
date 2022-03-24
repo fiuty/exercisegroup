@@ -1,9 +1,12 @@
 package com.dayue.springfamily.controller;
 
+import com.dayue.common.exception.BussinessException;
+import com.dayue.common.pojo.BaseResponse;
 import com.dayue.springfamily.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,5 +28,13 @@ public class TestController {
     @GetMapping("/two")
     public void two() {
         testService.dateSourceTwo();
+    }
+
+    @GetMapping("/exception/test")
+    public BaseResponse<String> exceptionTest(@RequestParam("num") Integer num) {
+        if (num == 1) {
+            throw new BussinessException("参数异常");
+        }
+        return BaseResponse.success("输入数字正确");
     }
 }
