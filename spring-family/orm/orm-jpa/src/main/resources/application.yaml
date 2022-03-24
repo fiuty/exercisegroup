@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/exercisegroup?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: none
+      # 数据库字段与对象驼峰转换
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: true

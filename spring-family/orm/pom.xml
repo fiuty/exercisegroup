@@ -3,30 +3,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>exercise-group</artifactId>
         <groupId>com.dayue</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <artifactId>spring-family</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.dayue</groupId>
-    <artifactId>spring-family</artifactId>
+    <artifactId>orm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-family</name>
-    <description>Spring Family Course</description>
+    <name>orm</name>
+    <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
-    <modules>
-        <module>datasource</module>
-        <module>orm</module>
-    </modules>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>com.dayue</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
     <build>
         <plugins>
             <plugin>
