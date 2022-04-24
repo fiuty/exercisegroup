@@ -1,1 +1,4 @@
-
+file:
+  info:
+    maxSize: 10485760
+    pathPrefix: F:\\新建文件夹
